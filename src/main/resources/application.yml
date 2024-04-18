@@ -12,25 +12,18 @@ spring:
   mail:
     host: smtp.163.com
     username: 18937260063@163.com
-    password: GMTDCGRTOJXBQEIF
+    password: VGZUOSMZLBMLMHDI
     #   password: JTHHDRHMRSCNTXBY
     default-encoding: UTF-8
     protocol: smtp
-    port: 465
+    port: 587
     properties:
       mail:
         smtp:
-          auth: true
-          socketFactory:
-            class: javax.net.ssl.SSLSocketFactory
-            port: 465
           ssl:
             enable: true
-          starttls:
-            enable: true
-            required: true
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.example.demo.entity
 server:
-  port: 10086
+  port: 8080
