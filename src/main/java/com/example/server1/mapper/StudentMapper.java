@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface StudentMapper {
-    boolean save(@Param("student") Student student);
+    void save(@Param("student") Student student);
     Student findByEmail(@Param("email") String email);
 }

@@ -1,6 +1,7 @@
 package com.example.server1.controller;
 
 import com.example.server1.DTO.EmailDTO;
+import com.example.server1.Utils.Md5Util;
 import com.example.server1.Utils.RandomUtil;
 import com.example.server1.Utils.Result;
 import com.example.server1.entity.Student;
@@ -63,12 +64,32 @@ public class StudentController {
     }
 
 
+//
+//    @PostMapping("/register")
+//    public boolean addStudent(@RequestBody Student student) {
+//        System.out.println("正在保存学生对象：" + student);
+//        return studentService.save(student);
+//    }
 
-    @PostMapping("/addStudent")
-    public boolean addStudent(@RequestBody Student student) {
-        System.out.println("正在保存学生对象：" + student);
-        return studentService.save(student);
+    @PostMapping("/register")
+    public Result register(@RequestBody Student student) {
+        System.out.println("正在验证学生注册：" + student);
+        ValueOperations<String, String> operations = stringRedisTemplate.opsForValue();
+//        if(student.getEmail().length() ==0){
+//            return Result.error("请输入邮箱！");
+//        }
+//        if (student.getCode().length()!=6){
+//            return Result.error("验证码长度错误！");
+//        }
+//        if (!student.getCode().equals((operations.get(student.getCode())))){
+//            return Result.error("注册失败！");
+//        }
+        student.setPassword((Md5Util.getMD5String(student.getPassword())));
+        studentService.save(student);
+        operations.getOperations().delete(student.getEmail());
+        return Result.success("注册成功");
     }
+
 
     @PostMapping("/login")
     public boolean login(@RequestBody Student student) {
