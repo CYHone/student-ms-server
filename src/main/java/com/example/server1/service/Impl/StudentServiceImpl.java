@@ -4,9 +4,11 @@ import com.example.server1.entity.Student;
 import com.example.server1.mapper.StudentMapper;
 import com.example.server1.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
+@Qualifier("studentServiceImpl")
 public class StudentServiceImpl implements StudentService {
 
     @Autowired
@@ -26,6 +28,10 @@ public class StudentServiceImpl implements StudentService {
         return student;
     }
 
+
+    public boolean updateById(Student student) {
+            return studentMapper.updateById(student);
+    }
 
 
 }

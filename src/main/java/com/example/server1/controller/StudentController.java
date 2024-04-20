@@ -10,6 +10,8 @@ import com.example.server1.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URLDecoder;
@@ -63,27 +65,10 @@ public class StudentController {
         return Result.error("已被注册！");
     }
 
-
-//
-//    @PostMapping("/register")
-//    public boolean addStudent(@RequestBody Student student) {
-//        System.out.println("正在保存学生对象：" + student);
-//        return studentService.save(student);
-//    }
-
     @PostMapping("/register")
     public Result register(@RequestBody Student student) {
         System.out.println("正在验证学生注册：" + student);
         ValueOperations<String, String> operations = stringRedisTemplate.opsForValue();
-//        if(student.getEmail().length() ==0){
-//            return Result.error("请输入邮箱！");
-//        }
-//        if (student.getCode().length()!=6){
-//            return Result.error("验证码长度错误！");
-//        }
-//        if (!student.getCode().equals((operations.get(student.getCode())))){
-//            return Result.error("注册失败！");
-//        }
         student.setPassword((Md5Util.getMD5String(student.getPassword())));
         studentService.save(student);
         operations.getOperations().delete(student.getEmail());
@@ -92,14 +77,25 @@ public class StudentController {
 
 
     @PostMapping("/login")
-    public boolean login(@RequestBody Student student) {
+    public ResponseEntity<Student> login(@RequestBody Student student) {
         System.out.println("正在验证学生登录：" + student);
         Student s = studentService.findByEmail(student.getEmail());
         System.out.println("查询到的学生：" + s);
-        if (s == null || !s.getPassword().equals(student.getPassword())) {
-            return false;
+        if (s == null || !Md5Util.checkPassword(student.getPassword(), s.getPassword())) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         } else {
-            return true;
+            System.out.println(s.getName() + "成功登录");
+            return ResponseEntity.ok(s);
         }
     }
+
+    @PostMapping("updateStudent")
+    public boolean updateStudent(@RequestBody Student student) {
+
+        System.out.println("更新 " + student);
+        student.setPassword((Md5Util.getMD5String(student.getPassword())));
+        System.out.println("更新加密 " + student);
+        return studentService.updateById(student);
+    }
+
 }

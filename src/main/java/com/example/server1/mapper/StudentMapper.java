@@ -11,4 +11,6 @@ import org.springframework.stereotype.Repository;
 public interface StudentMapper {
     void save(@Param("student") Student student);
     Student findByEmail(@Param("email") String email);
+
+    boolean updateById(Student student);
 }

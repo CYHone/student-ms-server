@@ -10,6 +10,7 @@ import org.apache.ibatis.type.Alias;
 @AllArgsConstructor
 @Alias("Student")
 public class Student {
+    // 成员变量
     private Integer id;
     private String name;
     private String password;
@@ -17,5 +18,5 @@ public class Student {
     private String email;
     private String phone;
     private String code;
-}
 
+}

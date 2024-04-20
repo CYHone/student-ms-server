@@ -6,4 +6,6 @@ public interface StudentService {
     void save(Student student);
 
     Student findByEmail(String email);
+
+    boolean updateById(Student student);
 }
