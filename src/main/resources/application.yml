@@ -27,3 +27,6 @@ mybatis:
   type-aliases-package: com.example.demo.entity
 server:
   port: 8080
+files:
+  upload:
+    path: "D:/Studentms/upload/"

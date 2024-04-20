@@ -8,12 +8,17 @@ import com.example.server1.entity.Student;
 import com.example.server1.service.EmailService;
 import com.example.server1.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import com.example.server1.Utils.UUIDUtils;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeUnit;
@@ -97,5 +102,38 @@ public class StudentController {
         System.out.println("更新加密 " + student);
         return studentService.updateById(student);
     }
+
+
+//    @Value("${pictureFile.path}")
+//    private String picturePath;
+//
+//    @Value("${pictureFile.path-mapping}")
+//    private String picturePathMapping;
+//
+//    @PostMapping("/upload/img")
+//    public String upload(@RequestParam("file") MultipartFile file) {
+//        if (file.isEmpty()) {
+//            return "上传的文件为空";
+//        }
+//
+//        String fileName = file.getOriginalFilename();
+//        String suffixName = fileName.substring(fileName.lastIndexOf("."));
+//        fileName = UUIDUtils.getUUID() + suffixName;
+////        fileName = UUIDutils.getUUID() + suffixName;
+//        File dest = new File(picturePath + fileName);
+//        if (!dest.getParentFile().exists()) {
+//            dest.getParentFile().mkdirs();
+//        }
+//        try {
+//            file.transferTo(dest);
+//            String finalFileName = "http://localhost:8080" + picturePathMapping + fileName;
+//            System.out.println(finalFileName);
+//            return finalFileName; // 返回上传后的文件路径
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return "上传失败";
+//    }
+
 
 }
