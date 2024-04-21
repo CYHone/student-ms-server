@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.server1.mapper.CourseMapper">
+
+    <insert id="selectCourse" >
+        INSERT INTO school.courseselection (CourseID, id)
+        VALUES (#{courseID}, #{studentID})
+    </insert>
+
+<!--    <select id="getAllMyCourses">-->
+<!--        SELECT c.*-->
+<!--        FROM Course c-->
+<!--                 JOIN CourseSelection cs ON c.CourseID = cs.CourseID-->
+<!--        WHERE cs.id = #{studentId}-->
+<!--    </select>-->
+</mapper>

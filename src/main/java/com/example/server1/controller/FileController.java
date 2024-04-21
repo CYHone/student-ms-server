@@ -46,10 +46,12 @@ public class FileController {
         file.transferTo(uploadFile);
         System.out.println(url);
         System.out.println("上传完成");
+        System.out.println(originalFilename);
         // 存入数据库（根据项目需求）
         // Data_Resource data_resource = new Data_Resource(); // 数据库实体类
         // data_resource.setR_name(originalFilename);
         // datasMapper.Insert_res(data_resource);
+
         return url;
     }
 
