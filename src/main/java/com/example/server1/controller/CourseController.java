@@ -1,6 +1,7 @@
 package com.example.server1.controller;
 
 import com.example.server1.DTO.CourseDTO;
+import com.example.server1.DTO.GradeDTO;
 import com.example.server1.entity.SelectCourseRequest;
 import com.example.server1.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,11 @@ public class CourseController {
     public boolean deleteCourse(@RequestBody Integer  deleteCourseId ){
         System.out.println("删除课程ID" + deleteCourseId);
         return courseService.deleteCourse(deleteCourseId);
+    }
+    @PostMapping("/grade")
+    public List<GradeDTO> getGrade(@RequestBody Integer studentId){
+        System.out.println("学号" + studentId);
+        return courseService.getGrade(studentId);
     }
 
 
