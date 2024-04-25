@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service
 public interface CourseService {
-    List<CourseDTO> getAllCourses();
+
 
     boolean selectCourse(Integer courseID, Integer studentID);
 
@@ -18,4 +18,12 @@ public interface CourseService {
     boolean deleteCourse(Integer deleteCourseId);
 
     List<GradeDTO> getGrade(Integer studentId);
+
+    int getTotalCount();
+    List<CourseDTO> getAllCourses(int offset, int limit);
+
+
+    List<CourseDTO> getCourses(int offset, int limit, String keyword, String type);
+
+    int getCoursesCount(String keyword, String type);
 }

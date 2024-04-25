@@ -9,6 +9,7 @@ import com.example.server1.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -24,10 +25,6 @@ public class CourseServiceImpl  implements CourseService {
     @Autowired
     public void setGradeMapper(GradeMapper gradeMapper) {
         this.gradeMapper = gradeMapper;
-    }
-    @Override
-    public List<CourseDTO> getAllCourses() {
-        return courseMapper.getAllCourses();
     }
 
 
@@ -49,6 +46,47 @@ public class CourseServiceImpl  implements CourseService {
     @Override
     public List<GradeDTO> getGrade(Integer studentId) {
         return gradeMapper.getGrade(studentId);
+    }
+
+    @Override
+    public int getTotalCount() {
+        return courseMapper.getTotalCount();
+    }
+    @Override
+    public List<CourseDTO> getAllCourses(int offset, int limit) {
+        return courseMapper.getAllCourses(offset, limit);
+    }
+
+    @Override
+    public List<CourseDTO> getCourses(int offset, int limit, String keyword, String type) {
+        switch (type) {
+            case "courseID":
+                return courseMapper.getCoursesByCourseID(offset, limit, keyword);
+            case "courseName":
+                return courseMapper.getCoursesByCourseName(offset, limit, keyword);
+            case "teacherID":
+                return courseMapper.getCoursesByTeacherID(offset, limit, keyword);
+            case "teacherName":
+                return courseMapper.getCoursesByTeacherName(offset, limit, keyword);
+            default:
+                return Collections.emptyList();
+        }
+    }
+
+    @Override
+    public int getCoursesCount(String keyword, String type) {
+        switch (type) {
+            case "courseID":
+                return courseMapper.getCoursesCountByCourseID(keyword);
+            case "courseName":
+                return courseMapper.getCoursesCountByCourseName(keyword);
+            case "teacherID":
+                return courseMapper.getCoursesCountByTeacherID(keyword);
+            case "teacherName":
+                return courseMapper.getCoursesCountByTeacherName(keyword);
+            default:
+                return 0;
+        }
     }
 
 

@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/student")
 public class CourseController {
@@ -22,9 +25,33 @@ public class CourseController {
     }
 
     @PostMapping("/courses")
-    public List<CourseDTO> getAllCourses() {
-        return courseService.getAllCourses();
+    public Map<String, Object> getAllCourses(@RequestBody Map<String, Integer> paginationParams) {
+        int offset = paginationParams.getOrDefault("offset", 0);
+        int limit = paginationParams.getOrDefault("limit", 10); // 默认每页显示 10 条数据
+        List<CourseDTO> courses = courseService.getAllCourses(offset, limit);
+        int totalCount = courseService.getTotalCount(); // 获取总记录数
+        Map<String, Object> result = new HashMap<>();
+        result.put("courses", courses);
+        result.put("totalCount", totalCount);
+        return result;
     }
+
+    @PostMapping("/searchCourse")
+    public Map<String, Object> getCourses(@RequestBody Map<String, Object> requestData) {
+        int offset = (int) requestData.getOrDefault("offset", 0);
+        int limit = (int) requestData.getOrDefault("limit", 10);
+        String keyword = (String) requestData.getOrDefault("keyword", "");
+        String type = (String) requestData.getOrDefault("type", "courseName");
+
+        List<CourseDTO> courses = courseService.getCourses(offset, limit, keyword, type);
+        int totalCount = courseService.getCoursesCount(keyword, type);
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("courses", courses);
+        result.put("totalCount", totalCount);
+        return result;
+    }
+
     @PostMapping("/selectCourse")
     public boolean selectCourse(@RequestBody SelectCourseRequest request) {
         Integer courseID = request.getCourseID();
@@ -49,7 +76,5 @@ public class CourseController {
         System.out.println("学号" + studentId);
         return courseService.getGrade(studentId);
     }
-
-
 
 }
