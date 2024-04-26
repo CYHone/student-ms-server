@@ -46,6 +46,7 @@ public class StudentController {
         EmailDTO emailDTO = new EmailDTO();
         // 设置验证码
         String code = RandomUtil.getVerifyCode();
+        System.out.println("验证码: " + code);
         String content = "验证码为 " + code + " ，五分钟有效，请妥善保管！";
         // 邮件内容
         emailDTO.setEmail(email);
@@ -56,6 +57,8 @@ public class StudentController {
         Student student = studentService.findByEmail(email);
         if(student == null){
             //没被注册
+            System.out.println("没被注册");
+            System.out.println("准备向邮箱发送 " );
             try {
                 emailService.sendMsg(emailDTO);
                 // 往Redis中存储一个键值对
@@ -73,6 +76,7 @@ public class StudentController {
     @PostMapping("/register")
     public Result register(@RequestBody Student student) {
         System.out.println("正在验证学生注册：" + student);
+        //还需要进行验证码判断
         ValueOperations<String, String> operations = stringRedisTemplate.opsForValue();
         student.setPassword((Md5Util.getMD5String(student.getPassword())));
         studentService.save(student);

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.server1.mapper.TeacherMapper">
+    <insert id="save">
+       INSERT INTO school.teacher (TeacherID, TeacherName, Password, Email, PhoneNumber)
+       VALUES (#{teacher.teacherID}, #{teacher.teacherName}, #{teacher.password}, #{teacher.email}, #{teacher.phoneNumber})
+    </insert>
+    <select id="findByEmail" resultType="com.example.server1.entity.Teacher">
+        SELECT *
+        FROM school.teacher
+        WHERE Email = #{email}
+    </select>
+
+    <update id="updateById">
+        UPDATE school.teacher set
+                                  TeacherName = #{teacherName},
+                                  Password = #{password},
+                                  Email = #{email},
+                                  PhoneNumber = #{phoneNumber}
+        where TeacherID = #{teacherID}
+    </update>
+
+</mapper>
