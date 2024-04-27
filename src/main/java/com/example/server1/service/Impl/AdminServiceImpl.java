@@ -23,4 +23,14 @@ public class AdminServiceImpl implements AdminService {
     public AdminDTO login(String name) {
         return adminMapper.login(name);
     }
+
+    @Override
+    public boolean updateTeacherPassword(String password, int teacherID) {
+        return adminMapper.updateTeacherPassword(password, teacherID);
+    }
+
+    @Override
+    public boolean updateStudentPassword(String password, int id) {
+        return adminMapper.updateStudentPassword(password, id);
+    }
 }

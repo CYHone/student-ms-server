@@ -9,4 +9,8 @@ import java.util.List;
 public interface AdminService {
 
     AdminDTO login(String name);
+
+    boolean updateTeacherPassword(String password, int teacherID);
+
+    boolean updateStudentPassword(String password, int id);
 }

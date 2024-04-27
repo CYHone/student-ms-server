@@ -97,14 +97,14 @@ public class TeacherController {
         return ResponseEntity.ok(t);
     }
 
-    @PostMapping("updateTeacher")
+    @PostMapping("/updateTeacher")
     public boolean updateTeacher(@RequestBody Teacher teacher) {
         System.out.println("正在更新教师信息：" + teacher);
         teacher.setPassword((Md5Util.getMD5String(teacher.getPassword())));
         System.out.println("更新加密后的教师信息：" + teacher);
         return teacherService.updateById(teacher);
     }
-    @PostMapping("inputGrade")
+    @PostMapping("/inputGrade")
     public boolean inputGrade(@RequestBody GradeDTO gradeDTO){
         System.out.println("正在录入成绩：" + gradeDTO);
         return teacherService.inputGrade(gradeDTO);

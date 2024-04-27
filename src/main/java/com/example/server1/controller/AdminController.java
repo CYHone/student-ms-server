@@ -1,6 +1,9 @@
 package com.example.server1.controller;
 
 import com.example.server1.DTO.AdminDTO;
+import com.example.server1.Utils.Md5Util;
+import com.example.server1.entity.Student;
+import com.example.server1.entity.Teacher;
 import com.example.server1.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,4 +40,24 @@ public class AdminController {
      return flag;
     }
 
+    @PostMapping("/updateTeacher")
+    public boolean updateTeacher(@RequestBody Teacher teacher) {
+        System.out.println("正在更新教师信息：" + teacher);
+        teacher.setPassword((Md5Util.getMD5String(teacher.getPassword())));
+        System.out.println("更新加密后的教师信息：" + teacher);
+        String password = teacher.getPassword();
+        System.out.println("更新加密后的密码信息：" + password);
+        int teacherID = teacher.getTeacherID();
+        return adminService.updateTeacherPassword(password, teacherID);
+    }
+    @PostMapping("/updateStudent")
+    public boolean updateStudent(@RequestBody Student student) {
+        System.out.println("正在更新学生信息：" + student);
+        student.setPassword((Md5Util.getMD5String(student.getPassword())));
+        System.out.println("更新加密后的学生信息：" + student);
+        String password = student.getPassword();
+        System.out.println("更新加密后的密码信息：" + password);
+        int id= student.getId();
+        return adminService.updateStudentPassword(password, id);
+    }
 }
