@@ -33,4 +33,7 @@ public interface TeacherCourseMapper {
 
     @Select("SELECT * FROM Grade WHERE CourseID = #{keyword}  AND Score < 60 LIMIT #{limit} OFFSET #{offset}")
     List<GradeDTO> getGradeByNoPass(int offset, int limit, String keyword);
+
+    @Select(("SELECT * FROM Grade WHERE CourseID = #{courseID} "))
+    List<GradeDTO> getCourseGrade(int courseID);
 }

@@ -108,36 +108,7 @@ public class StudentController {
     }
 
 
-//    @Value("${pictureFile.path}")
-//    private String picturePath;
-//
-//    @Value("${pictureFile.path-mapping}")
-//    private String picturePathMapping;
-//
-//    @PostMapping("/upload/img")
-//    public String upload(@RequestParam("file") MultipartFile file) {
-//        if (file.isEmpty()) {
-//            return "上传的文件为空";
-//        }
-//
-//        String fileName = file.getOriginalFilename();
-//        String suffixName = fileName.substring(fileName.lastIndexOf("."));
-//        fileName = UUIDUtils.getUUID() + suffixName;
-////        fileName = UUIDutils.getUUID() + suffixName;
-//        File dest = new File(picturePath + fileName);
-//        if (!dest.getParentFile().exists()) {
-//            dest.getParentFile().mkdirs();
-//        }
-//        try {
-//            file.transferTo(dest);
-//            String finalFileName = "http://localhost:8080" + picturePathMapping + fileName;
-//            System.out.println(finalFileName);
-//            return finalFileName; // 返回上传后的文件路径
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return "上传失败";
-//    }
+
 
 
 }

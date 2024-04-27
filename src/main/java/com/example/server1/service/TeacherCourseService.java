@@ -17,4 +17,5 @@ public interface TeacherCourseService {
 
     List<GradeDTO> getGrade(int offset, int limit, String keyword, String type);
 
+    List<GradeDTO> getCourseGrade(int courseID);
 }

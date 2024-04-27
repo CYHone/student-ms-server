@@ -51,6 +51,18 @@ public class TeacherCourseController {
 //        result.put("totalCount", totalCount);
 
        return result;
-
     }
+
+//    @PostMapping("/grade")
+//    public List<GradeDTO> getGrade(@RequestBody Integer studentId){
+//        System.out.println("学号" + studentId);
+//        return courseService.getGrade(studentId);
+//    }
+    @PostMapping("/searchCourse")
+    public List<GradeDTO> getCourses(@RequestBody Map<String, Object> requestData) {
+        System.out.println(requestData);
+        int CourseID = (int) requestData.getOrDefault("CourseID", 0);
+        return teacherCourseService.getCourseGrade(CourseID);
+    }
+
 }

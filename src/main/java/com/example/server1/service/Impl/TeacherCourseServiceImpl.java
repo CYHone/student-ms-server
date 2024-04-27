@@ -45,5 +45,10 @@ public class TeacherCourseServiceImpl implements TeacherCourseService {
         return null;
     }
 
+    @Override
+    public List<GradeDTO> getCourseGrade(int courseID) {
+        return teacherCourseMapper.getCourseGrade(courseID);
+    }
+
 
 }
