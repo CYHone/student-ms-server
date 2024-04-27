@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.server1.mapper.TeacherCourseMapper">
+
+<insert id="buildCourse">
+    INSERT INTO school.course (CourseName, Classroom, TeacherName, Introduce, TeacherID, Credit, Time)
+    VALUES (#{courseDTO.CourseName}, #{courseDTO.Classroom}, #{courseDTO.TeacherName}, #{courseDTO.Introduce},
+            #{courseDTO.TeacherID}, #{courseDTO.Credit}, #{courseDTO.Time})
+</insert>
+
+
+</mapper>
