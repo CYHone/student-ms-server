@@ -1,6 +1,7 @@
 package com.example.server1.controller;
 
 import com.example.server1.DTO.CourseDTO;
+import com.example.server1.DTO.GradeDTO;
 import com.example.server1.service.TeacherCourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +35,22 @@ public class TeacherCourseController {
     public boolean buildCourse(@RequestBody CourseDTO courseDTO) {
         System.out.println(courseDTO);
        return teacherCourseService.buildCourse(courseDTO);
-//        return true;
+    }
+    @PostMapping("searchGrade")
+    public Map<String, Object> getGrade(@RequestBody Map<String, Object> requestData) {
+        System.out.println(requestData);
+        int offset = (int) requestData.getOrDefault("offset", 0);
+        int limit = (int) requestData.getOrDefault("limit", 5);
+        String keyword = (String) requestData.getOrDefault("keyword", "");
+        String type = (String) requestData.getOrDefault("type", "");
+        List<GradeDTO> grades = teacherCourseService.getGrade(offset, limit, keyword, type);
+//        int totalCount = teacherCourseService.getGradeCount(keyword, type);
+//
+        Map<String, Object> result = new HashMap<>();
+       result.put("grades", grades);
+//        result.put("totalCount", totalCount);
+
+       return result;
+
     }
 }

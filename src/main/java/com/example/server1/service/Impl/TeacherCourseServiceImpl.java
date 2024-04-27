@@ -1,6 +1,7 @@
 package com.example.server1.service.Impl;
 
 import com.example.server1.DTO.CourseDTO;
+import com.example.server1.DTO.GradeDTO;
 import com.example.server1.mapper.TeacherCourseMapper;
 import com.example.server1.service.TeacherCourseService;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,20 @@ public class TeacherCourseServiceImpl implements TeacherCourseService {
     @Override
     public boolean buildCourse(CourseDTO courseDTO) {
         return teacherCourseMapper.buildCourse(courseDTO);
+    }
+
+    @Override
+    public List<GradeDTO> getGrade(int offset, int limit, String keyword, String type) {
+        if (type.equals("well")) {
+            return teacherCourseMapper.getGradeByWell(offset, limit, keyword);
+        } else if (type.equals("good")) {
+            return teacherCourseMapper.getGradeByGood(offset, limit, keyword);
+        } else if (type.equals("pass")) {
+            return teacherCourseMapper.getGradeByPass(offset, limit, keyword);
+        } else if (type.equals("noPass")) {
+            return teacherCourseMapper.getGradeByNoPass(offset, limit, keyword);
+        }
+        return null;
     }
 
 

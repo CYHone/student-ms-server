@@ -1,6 +1,7 @@
 package com.example.server1.mapper;
 
 import com.example.server1.DTO.CourseDTO;
+import com.example.server1.DTO.GradeDTO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -20,4 +21,16 @@ public interface TeacherCourseMapper {
     int getCount(int teacherID);
 
     boolean buildCourse(@Param("courseDTO") CourseDTO courseDTO);
+
+    @Select("SELECT * FROM Grade WHERE CourseID = #{keyword}  AND Score >= 90 LIMIT #{limit} OFFSET #{offset}")
+    List<GradeDTO> getGradeByWell(int offset, int limit, String keyword);
+
+    @Select("SELECT * FROM Grade WHERE CourseID = #{keyword}  AND Score >= 70 AND Score < 90 LIMIT #{limit} OFFSET #{offset}")
+    List<GradeDTO> getGradeByGood(int offset, int limit, String keyword);
+
+    @Select("SELECT * FROM Grade WHERE CourseID = #{keyword}  AND Score >= 60  LIMIT #{limit} OFFSET #{offset}")
+    List<GradeDTO> getGradeByPass(int offset, int limit, String keyword);
+
+    @Select("SELECT * FROM Grade WHERE CourseID = #{keyword}  AND Score < 60 LIMIT #{limit} OFFSET #{offset}")
+    List<GradeDTO> getGradeByNoPass(int offset, int limit, String keyword);
 }

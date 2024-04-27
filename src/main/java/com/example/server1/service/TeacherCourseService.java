@@ -1,6 +1,7 @@
 package com.example.server1.service;
 
 import com.example.server1.DTO.CourseDTO;
+import com.example.server1.DTO.GradeDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,4 +14,7 @@ public interface TeacherCourseService {
     int getCount(int teacherID);
 
     boolean buildCourse(CourseDTO courseDTO);
+
+    List<GradeDTO> getGrade(int offset, int limit, String keyword, String type);
+
 }
