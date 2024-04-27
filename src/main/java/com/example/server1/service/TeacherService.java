@@ -1,5 +1,6 @@
 package com.example.server1.service;
 
+import com.example.server1.DTO.GradeDTO;
 import com.example.server1.entity.Teacher;
 
 public interface TeacherService {
@@ -8,4 +9,6 @@ public interface TeacherService {
     void save(Teacher teacher) ;
 
     boolean updateById(Teacher teacher);
+
+    boolean inputGrade(GradeDTO gradeDTO);
 }

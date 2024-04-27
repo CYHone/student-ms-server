@@ -1,5 +1,6 @@
 package com.example.server1.service.Impl;
 
+import com.example.server1.DTO.GradeDTO;
 import com.example.server1.entity.Teacher;
 import com.example.server1.mapper.TeacherMapper;
 import com.example.server1.service.TeacherService;
@@ -28,5 +29,10 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public boolean updateById(Teacher teacher) {
         return teacherMapper.updateById(teacher);
+    }
+
+    @Override
+    public boolean inputGrade(GradeDTO gradeDTO) {
+        return teacherMapper.inputGrade(gradeDTO);
     }
 }

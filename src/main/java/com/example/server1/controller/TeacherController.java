@@ -1,6 +1,7 @@
 package com.example.server1.controller;
 
 import com.example.server1.DTO.EmailDTO;
+import com.example.server1.DTO.GradeDTO;
 import com.example.server1.Utils.Md5Util;
 import com.example.server1.Utils.RandomUtil;
 import com.example.server1.Utils.Result;
@@ -102,6 +103,11 @@ public class TeacherController {
         teacher.setPassword((Md5Util.getMD5String(teacher.getPassword())));
         System.out.println("更新加密后的教师信息：" + teacher);
         return teacherService.updateById(teacher);
+    }
+    @PostMapping("inputGrade")
+    public boolean inputGrade(@RequestBody GradeDTO gradeDTO){
+        System.out.println("正在录入成绩：" + gradeDTO);
+        return teacherService.inputGrade(gradeDTO);
     }
 
 }

@@ -7,6 +7,10 @@
        INSERT INTO school.teacher (TeacherID, TeacherName, Password, Email, PhoneNumber)
        VALUES (#{teacher.teacherID}, #{teacher.teacherName}, #{teacher.password}, #{teacher.email}, #{teacher.phoneNumber})
     </insert>
+<!--    <insert id="inputGrade">-->
+<!--        INSERT INTO school.grade (CourseID, id, Score)-->
+<!--        VALUES (#{courseID}, #{id}, #{score})-->
+<!--    </insert>-->
     <select id="findByEmail" resultType="com.example.server1.entity.Teacher">
         SELECT *
         FROM school.teacher
