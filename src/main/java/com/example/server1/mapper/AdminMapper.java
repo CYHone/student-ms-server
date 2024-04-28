@@ -1,9 +1,11 @@
 package com.example.server1.mapper;
 
 import com.example.server1.DTO.AdminDTO;
+import com.example.server1.DTO.CourseDTO;
 import com.example.server1.DTO.GradeDTO;
 import com.example.server1.DTO.SelectionCourseDTO;
 import com.example.server1.entity.Student;
+import com.example.server1.entity.Teacher;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -50,4 +52,22 @@ public interface AdminMapper {
 
     @Select("SELECT * FROM school.student WHERE email = #{keyword}")
     Student inquireStudentInfoByEmail(String keyword);
+
+    @Select("SELECT * FROM school.course WHERE TeacherID = #{keyword}")
+    List<CourseDTO> inquireTeacherById(String keyword);
+
+    @Select("SELECT * FROM school.course WHERE TeacherName = #{keyword}")
+    List<CourseDTO> inquireTeacherByName(String keyword);
+
+    @Select("SELECT c.* FROM school.course c INNER JOIN school.teacher t on c.TeacherID = t.TeacherID WHERE t.Email = #{keyword}")
+    List<CourseDTO> inquireTeacherByEmail(String keyword);
+
+    @Select("SELECT * FROM school.teacher WHERE TeacherID = #{keyword}")
+    Teacher inquireTeacherInfoById(String keyword);
+
+    @Select("SELECT * FROM school.teacher WHERE TeacherName = #{keyword}")
+    Teacher inquireTeacherInfoByName(String keyword);
+
+    @Select("SELECT * FROM school.teacher WHERE Email = #{keyword}")
+    Teacher inquireTeacherInfoByEmail(String keyword);
 }

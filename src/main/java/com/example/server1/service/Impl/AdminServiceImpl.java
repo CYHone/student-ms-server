@@ -2,9 +2,11 @@ package com.example.server1.service.Impl;
 
 import com.example.server1.DTO.AdminDTO;
 
+import com.example.server1.DTO.CourseDTO;
 import com.example.server1.DTO.GradeDTO;
 import com.example.server1.DTO.SelectionCourseDTO;
 import com.example.server1.entity.Student;
+import com.example.server1.entity.Teacher;
 import com.example.server1.mapper.AdminMapper;
 import com.example.server1.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +71,34 @@ public class AdminServiceImpl implements AdminService {
             return adminMapper.inquireStudentInfoByName(keyword);
         } else if (type.equals("email")) {
             return adminMapper.inquireStudentInfoByEmail(keyword);
+        }
+        return null;
+    }
+
+    @Override
+    public List<CourseDTO> inquireTeacher(String keyword, String type) {
+        if (type.equals("teacherID")){
+            return adminMapper.inquireTeacherById(keyword);
+        }
+        if (type.equals("teacherName")){
+            return adminMapper.inquireTeacherByName(keyword);
+        }
+        if (type.equals("email")){
+            return adminMapper.inquireTeacherByEmail(keyword);
+        }
+        return null;
+    }
+
+    @Override
+    public Teacher inquireTeacherInfo(String keyword, String type) {
+        if (type.equals("teacherID")){
+            return adminMapper.inquireTeacherInfoById(keyword);
+        }
+        if (type.equals("teacherName")){
+            return adminMapper.inquireTeacherInfoByName(keyword);
+        }
+        if (type.equals("email")){
+            return adminMapper.inquireTeacherInfoByEmail(keyword);
         }
         return null;
     }

@@ -1,6 +1,7 @@
 package com.example.server1.controller;
 
 import com.example.server1.DTO.AdminDTO;
+import com.example.server1.DTO.CourseDTO;
 import com.example.server1.DTO.GradeDTO;
 import com.example.server1.DTO.SelectionCourseDTO;
 import com.example.server1.Utils.Md5Util;
@@ -90,6 +91,19 @@ public class AdminController {
         String keyword = (String) requestData.getOrDefault("keyword", "");
         String type = (String) requestData.getOrDefault("type", "");
 
-        return null;
+        if (type.equals("teacherID")) {
+            // 强转int
+            keyword = String.valueOf(Integer.parseInt(keyword));
+        }
+        System.out.println("keyword "+keyword);
+        System.out.println("type "+type);
+        List<CourseDTO> courses = adminService.inquireTeacher(keyword, type);
+        System.out.println(courses);
+        Teacher teacher = adminService.inquireTeacherInfo(keyword, type);
+        System.out.println(teacher);
+        Map<String, Object> result = new HashMap<>();
+        result.put("courses", courses);
+        result.put("teacher", teacher);
+        return result;
     }
 }

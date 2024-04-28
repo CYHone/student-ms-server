@@ -1,9 +1,11 @@
 package com.example.server1.service;
 
 import com.example.server1.DTO.AdminDTO;
+import com.example.server1.DTO.CourseDTO;
 import com.example.server1.DTO.GradeDTO;
 import com.example.server1.DTO.SelectionCourseDTO;
 import com.example.server1.entity.Student;
+import com.example.server1.entity.Teacher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,4 +24,8 @@ public interface AdminService {
     List<SelectionCourseDTO> inquireStudentCourse(String keyword, String type);
 
    Student inquireStudentInfo(String keyword, String type);
+
+    List<CourseDTO> inquireTeacher(String keyword, String type);
+
+    Teacher inquireTeacherInfo(String keyword, String type);
 }
