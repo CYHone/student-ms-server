@@ -28,4 +28,8 @@ public interface AdminService {
     List<CourseDTO> inquireTeacher(String keyword, String type);
 
     Teacher inquireTeacherInfo(String keyword, String type);
+
+    List<CourseDTO> getCourse(int courseID);
+
+    boolean changeCourse(CourseDTO courseDTO);
 }

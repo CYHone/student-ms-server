@@ -70,4 +70,9 @@ public interface AdminMapper {
 
     @Select("SELECT * FROM school.teacher WHERE Email = #{keyword}")
     Teacher inquireTeacherInfoByEmail(String keyword);
+
+    @Select("SELECT * FROM school.course WHERE CourseID = #{keyword}")
+    List<CourseDTO> getCourse(int courseID);
+@Update("UPDATE school.course SET CourseName = #{CourseName}, TeacherID = #{TeacherID}, Credit = #{Credit}, Time = #{Time}, Classroom = #{Classroom}, TeacherName = #{TeacherName}, Introduce = #{Introduce} WHERE CourseID = #{CourseID}")
+ boolean changeCourse(CourseDTO courseDTO);
 }

@@ -106,4 +106,18 @@ public class AdminController {
         result.put("teacher", teacher);
         return result;
     }
+    @PostMapping("/getCourse")
+    public List<CourseDTO> getCourse(@RequestBody Map<String, Object> requestData) {
+        System.out.println(requestData);
+        int courseID = (int) requestData.getOrDefault("courseID", 0);
+        System.out.println("courseID "+courseID);
+        List<CourseDTO> courseDTO = adminService.getCourse(courseID);
+        System.out.println(courseDTO);
+        return courseDTO;
+    }
+    @PostMapping("/changeCourse")
+    public boolean changeCourse(@RequestBody CourseDTO courseDTO) {
+        System.out.println(courseDTO);
+        return adminService.changeCourse(courseDTO);
+    }
 }

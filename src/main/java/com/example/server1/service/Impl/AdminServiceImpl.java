@@ -102,4 +102,14 @@ public class AdminServiceImpl implements AdminService {
         }
         return null;
     }
+
+    @Override
+    public List<CourseDTO> getCourse(int courseID) {
+        return adminMapper.getCourse(courseID);
+    }
+
+    @Override
+    public boolean changeCourse(CourseDTO courseDTO) {
+        return adminMapper.changeCourse(courseDTO);
+    }
 }
