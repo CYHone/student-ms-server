@@ -1,6 +1,8 @@
 package com.example.server1.controller;
 
 import com.example.server1.DTO.AdminDTO;
+import com.example.server1.DTO.GradeDTO;
+import com.example.server1.DTO.SelectionCourseDTO;
 import com.example.server1.Utils.Md5Util;
 import com.example.server1.entity.Student;
 import com.example.server1.entity.Teacher;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -59,5 +63,33 @@ public class AdminController {
         System.out.println("更新加密后的密码信息：" + password);
         int id= student.getId();
         return adminService.updateStudentPassword(password, id);
+    }
+    @PostMapping("/inquireStudent")
+    public Map<String, Object> inquireStudent(@RequestBody Map<String, Object> requestData) {
+        System.out.println(requestData);
+        String keyword = (String) requestData.getOrDefault("keyword", "");
+        String type = (String) requestData.getOrDefault("type", "");
+        if (type.equals("id")) {
+            // 强转int
+            keyword = String.valueOf(Integer.parseInt(keyword));
+        }
+        System.out.println("keyword "+keyword);
+        System.out.println("type "+type);
+        List<GradeDTO> grades = adminService.inquireStudent(keyword, type);
+        List<SelectionCourseDTO> courses = adminService.inquireStudentCourse(keyword, type);
+        Student student = adminService.inquireStudentInfo(keyword, type);
+        Map<String, Object> result = new HashMap<>();
+        result.put("grades", grades);
+        result.put("courses", courses);
+        result.put("student", student);
+        return result;
+    }
+    @PostMapping("/inquireTeacher")
+    public Map<String, Object> inquireTeacher(@RequestBody Map<String, Object> requestData) {
+        System.out.println(requestData);
+        String keyword = (String) requestData.getOrDefault("keyword", "");
+        String type = (String) requestData.getOrDefault("type", "");
+
+        return null;
     }
 }
