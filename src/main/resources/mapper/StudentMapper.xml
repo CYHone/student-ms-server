@@ -8,7 +8,7 @@
         VALUES (#{student.id}, #{student.name}, #{student.password}, #{student.className}, #{student.email}, #{student.phone})
     </insert>
 
-    <select id="findByEmail" resultType="com.example.server1.entity.Student">
+    <select id="findByEmail" resultType="com.example.server.entity.Student">
         SELECT *
         FROM school.student
         WHERE email = #{email}
