@@ -87,7 +87,7 @@ public class StudentController {
         System.out.println("查询到的学生：" + s);
         if (s == null || !Md5Util.checkPassword(student.getPassword(), s.getPassword())) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
-        } else {
+         } else {
             System.out.println(s.getName() + "成功登录");
             return ResponseEntity.ok(s);
         }
